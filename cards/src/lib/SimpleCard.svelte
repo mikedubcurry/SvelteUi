@@ -9,6 +9,7 @@
 <BaseCard {width} {style}>
 	<div class="title">{title}</div>
 	<p class="content">{mainContent}</p>
+	<slot name="action"/>
 </BaseCard>
 
 <style>

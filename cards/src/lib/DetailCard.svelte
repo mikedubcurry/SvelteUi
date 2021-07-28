@@ -21,14 +21,16 @@
 {#if isDetailOpen}
 	<div transition:fly={{ y: 100, opacity: 0 }} class="detail" use:portal hidden>
 		<slot>
-			<SimpleCard {title} mainContent={detail} {width} {style} />
+			<SimpleCard {title} mainContent={detail} {width} {style}>
+				<div class="detailAction" slot="action"><button on:click={() => (isDetailOpen = false)}>Close</button></div>
+			</SimpleCard>
 		</slot>
 	</div>
 	<div transition:fade on:click={() => (isDetailOpen = false)} class="bg-overlay" />
 {/if}
 
 <style>
-  	.title {
+	.title {
 		text-align: var(--card-title-align, center);
 		font-size: var(--card-title-size, 18px);
 		font-weight: bold;
@@ -46,7 +48,7 @@
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.4);
 		z-index: 100;
-    cursor: pointer;
+		cursor: pointer;
 	}
 	.detail {
 		position: fixed;
@@ -60,18 +62,17 @@
 		border: 1px solid #eee;
 		border-radius: calc(var(--card-padding, 16px) / 2);
 		padding: calc(var(--card-padding, 16px) / 2) var(--card-padding, 16px);
-    transition: background-color .3s ease;
+		transition: background-color 0.3s ease;
 		background-color: var(--card-title-bg, #aaa);
 	}
-  button:hover {
-    background-color: var(--card-title-hover, #bbb);
-  }
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: var(--card-padding, 16px);
-
-  }
+	button:hover {
+		background-color: var(--card-title-hover, #bbb);
+	}
+	.actions, .detailAction {
+		display: flex;
+		justify-content: flex-end;
+		padding: var(--card-padding, 16px);
+	}
 
 	.content {
 		font-size: var(--card-content-size, 16px);
